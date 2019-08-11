@@ -9,6 +9,9 @@ import ItemAddForm from '../item-add-form/item-add-form'
 import './app.css';
 
 export default class App extends Component {
+
+    maxId = 100;
+
     state = {
         todoData: [
             {label: 'Drink Coffee', important: false, id: 1},
@@ -33,7 +36,24 @@ export default class App extends Component {
     };
 
     addItem = (text) => {
-        console.log('Added ', text);
+
+        const newItem = {
+            label: text,
+            important: false,
+            id: this.maxId++
+        };
+
+        this.setState(({todoData}) => {
+
+            const newTodoData = [
+                ...todoData,
+                newItem
+            ];
+
+            return {
+                todoData: newTodoData
+            }
+        })
     };
 
 
